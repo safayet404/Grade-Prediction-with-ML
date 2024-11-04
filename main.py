@@ -9,13 +9,12 @@ import seaborn as sns
 df = pd.read_csv('dataset.csv')
 
 # Remove 'ID' as it is not useful for prediction
-df = df.drop(columns=['ID'])
+df = df.drop(columns=['ID','Week8_Total'])
 
 # Check for missing values
 missing_values = df.isnull().sum()
 print("Missing values in each column:\n", missing_values)
 
-# No missing values based on initial check
 # Our target is the 'Grade' column, everything else is a feature
 X = df.drop(columns=['Grade'])  # Features
 y = df['Grade']  # Target (Grade)
@@ -74,13 +73,13 @@ models = {
 }
 
 for model_name, y_pred in models.items():
-    r2 = r2_score(y_test, y_pred)
-    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred) 
+    mse = mean_squared_error(y_test, y_pred) 
     mae = mean_absolute_error(y_test, y_pred)
     print(f"{model_name}:")
-    print(f" - R² Score: {r2}")
-    print(f" - Mean Squared Error (MSE): {mse}")
-    print(f" - Mean Absolute Error (MAE): {mae}")
+    print(f" - R² Score: {r2 : .5f}%")
+    print(f" - Mean Squared Error (MSE): {mse : .5f}%")
+    print(f" - Mean Absolute Error (MAE): {mae : .5f}%")
     print()
 
 # Step 6: Plot Actual vs Predicted for all models
